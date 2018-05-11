@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 flask = "*"
 dialogflow = "*"
+google-cloud-translate = "*"
 
 [dev-packages]
 

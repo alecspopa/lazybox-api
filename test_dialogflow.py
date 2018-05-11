@@ -27,7 +27,8 @@ def detect_intent_texts(project_id, session_id, texts, language_code):
         print('Fulfillment text: {}\n'.format(
             response.query_result.fulfillment_text))
 
-        # print(response.query_result)
+        print(response.query_result)
 
 
-detect_intent_texts('lazybox-5fc02', 'sess1', ['turn on romantic light in the kitchen'], 'en')
+# detect_intent_texts('lazybox-5fc02', 'sess1', ['turn on romantic light in the kitchen'], 'en')
+detect_intent_texts('lazybox-5fc02', 'sess1', ['light up the romantic light in the kitchen'], 'en')
