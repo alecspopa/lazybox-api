@@ -1,8 +1,13 @@
+import os
+import dialogflow
+import http
+import firebase_admin
+
+from firebase_admin import credentials, db
+from google.cloud import translate
+
 from flask import Flask, request, jsonify
 
-from google.cloud import translate
-import dialogflow
-import random
 
 app = Flask(__name__)
 
@@ -14,17 +19,84 @@ def hello():
 
 @app.route("/intent", methods=['GET', 'POST'])
 def intent():
+    state_db = StateDB()
+
     if request.method == 'POST':
         text_en = translate_text(request.form['text'])
         intent = detect_intent('lazybox-5fc02', 'sess1', text_en, 'en')
 
+        state_db.push(intent)
+
         return jsonify(intent)
     else:
-        if round(random.uniform(0, 1)) == 1:
-            return 'kitchen|D4|on'
-        else:
-            return 'kitchen|D4|off'
-        # intent_to_device_string(intent)
+        latest_state = state_db.pop()
+
+        if latest_state is None:
+            return '', http.HTTPStatus.NO_CONTENT
+
+        return state_db.pop()
+
+
+class StateDB:
+    class __StateDB:
+        def __init__(self):
+            cred = credentials.Certificate(os.environ['FIREBASE_APPLICATION_CREDENTIALS'])
+
+            firebase_admin.initialize_app(cred, {
+                'databaseURL': os.environ['FIREBASE_DATABASE_URL']
+            })
+
+            self.db_ref = db.reference('states')
+
+    instance = None
+
+    def __init__(self):
+        if not StateDB.instance:
+            StateDB.instance = StateDB.__StateDB()
+
+    def __getattr__(self, name):
+        return getattr(self.instance, name)
+
+    def push(self, intent):
+        device_state = self.__intent_to_device_state(intent)
+
+        self.db_ref.push(device_state)
+
+    def pop(self):
+        latest_state = None
+
+        # pop from stack latest state
+        snapshot = self.db_ref.order_by_key().limit_to_first(1).get()
+
+        if not snapshot:
+            return latest_state
+
+        for key, val in snapshot.items():
+            latest_state = val
+
+            del_ref = db.reference('states/' + key)
+            del_ref.delete()
+
+        return latest_state
+
+    @staticmethod
+    def __intent_to_device_state(intent):
+        action = []
+
+        # add room info
+        for param in intent['parameters']:
+            if param['key'] == 'room':
+                action.append(param['value'])
+
+        # add pin and action info
+        if intent['action'] == 'smarthome.lights.switch.on':
+            action.append('D4')
+            action.append('on')
+        elif intent['action'] == 'smarthome.lights.switch.off':
+            action.append('D4')
+            action.append('off')
+
+        return '|'.join(action)
 
 
 def translate_text(text):
@@ -86,25 +158,6 @@ def detect_intent(project_id, session_id, text, language_code):
     }
 
     return intent
-
-
-def intent_to_device_string(intent):
-    action = []
-
-    # add room info
-    for param in intent['parameters']:
-        if param['key'] == 'room':
-            action.append(param['value'])
-
-    # add pin and action info
-    if intent['action'] == 'smarthome.lights.switch.on':
-        action.append('D4')
-        action.append('on')
-    elif intent['action'] == 'smarthome.lights.switch.off':
-        action.append('D4')
-        action.append('off')
-
-    return '|'.join(action)
 
 
 if __name__ == '__main__':

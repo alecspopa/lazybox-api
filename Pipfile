@@ -7,8 +7,9 @@ name = "pypi"
 flask = "*"
 gunicorn = "*"
 dialogflow = "*"
-google-cloud-translate = "*"
 firebase-admin = "*"
+google-cloud-translate = "*"
+google-cloud-speech = "*"
 
 [dev-packages]
 python-dotenv = "*"
