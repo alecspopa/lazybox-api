@@ -21,9 +21,9 @@ def intent():
         return jsonify(intent)
     else:
         if round(random.uniform(0, 1)) == 1:
-            return 'kitchen|d4|on'
+            return 'kitchen|D4|on'
         else:
-            return 'kitchen|d4|off'
+            return 'kitchen|D4|off'
         # intent_to_device_string(intent)
 
 
@@ -98,10 +98,10 @@ def intent_to_device_string(intent):
 
     # add pin and action info
     if intent['action'] == 'smarthome.lights.switch.on':
-        action.append('d4')
+        action.append('D4')
         action.append('on')
     elif intent['action'] == 'smarthome.lights.switch.off':
-        action.append('d4')
+        action.append('D4')
         action.append('off')
 
     return '|'.join(action)

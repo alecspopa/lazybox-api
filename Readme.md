@@ -13,3 +13,8 @@ https://robots.thoughtbot.com/how-to-manage-your-python-projects-with-pipenv
 Run Flask API
 
     FLASK_APP=api.py FLASK_DEBUG=1 python -m flask run
+    
+## Deploy to Heroku
+
+Push to Git
+Deploy from Heroku interface
