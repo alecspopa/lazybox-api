@@ -5,12 +5,13 @@ name = "pypi"
 
 [packages]
 flask = "*"
+gunicorn = "*"
 dialogflow = "*"
 google-cloud-translate = "*"
+firebase-admin = "*"
 
 [dev-packages]
 python-dotenv = "*"
-gunicorn = "*"
 
 [requires]
 python_version = "3.6"
