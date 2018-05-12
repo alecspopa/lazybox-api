@@ -9,6 +9,7 @@ dialogflow = "*"
 google-cloud-translate = "*"
 
 [dev-packages]
+python-dotenv = "*"
 
 [requires]
 python_version = "3.6"
