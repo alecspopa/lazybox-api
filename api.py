@@ -1,7 +1,8 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 from google.cloud import translate
 import dialogflow
+import random
 
 app = Flask(__name__)
 
@@ -11,12 +12,19 @@ def hello():
     return "Hello World!"
 
 
-@app.route("/intent", methods=['POST'])
+@app.route("/intent", methods=['GET', 'POST'])
 def intent():
-    text_en = translate_text(request.form['text'])
-    intent = detect_intent('lazybox-5fc02', 'sess1', text_en, 'en')
+    if request.method == 'POST':
+        text_en = translate_text(request.form['text'])
+        intent = detect_intent('lazybox-5fc02', 'sess1', text_en, 'en')
 
-    return intent_to_device_string(intent)
+        return jsonify(intent)
+    else:
+        if round(random.uniform(0, 1)) == 1:
+            return 'kitchen|d4|on'
+        else:
+            return 'kitchen|d4|off'
+        # intent_to_device_string(intent)
 
 
 def translate_text(text):
