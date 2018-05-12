@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lazybox-5fc02",
+  "private_key_id": "2582172d95b767c096f9fc103cc858e71ffb229e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCgXlfafAkbLZK8\nJ2ZyO+kDBG5MpKG9AcO8bQD3E848MTufuK1aQgvJceJX72Nz+AKZFSAZVmiUKNXv\nq2HTwhg8kZbhQXCNpRyOvWUX4ZyBQeMXSnhJFr9VdVNQ3lIx/jRJmd69TZ+YIesR\nCMoBZUYMfuK3vnN9/P3PZ4zdSaY3EmRQ+1XOTabgLmpkwDE9RXQSzvEH1f0cDZI8\nyJd44yKbOTjIfYm0SD4m5LGWH6ywYrBEkJy9oirpEDhZ8d0iJrNyJbXSD917NjlI\nVeKar10Q5CsqKPpJRDVwqCDSKfNw4HPpeoov0F8e4yfyWtDa+jCcqslcmz4MPYaG\nvIY/0WwBAgMBAAECggEAGgOTzr5GH+GBpwHhLXCoeLPUTJx8HBPYM42fFXViBAOc\nf2lOvZBvJwtRQyBzCpHVog16OoH4zufc5FbxtI8MrW6Ugg/CeUeqXUE9z+TqJVGR\ny+ppnrmQ6gTxMfIOdUueIb5TEnQwClaeMhIx6o4KEebXUiUTyQEsDuPmRtM2okIY\ni5Vj3/NNi0xsjxpzGtEbqlvArNFOioWrmPU9caf8THpmNGoOlobWKaTwwztUi+03\nm2tmFPRUZ0F1POB4sI8YnG2/3e9zV8RO834DuiwSfZxh4gXzDLRr+6Ghv/5KiTno\nVaqIx1K/Z5uwrdDPUrOI8iBeleDkc9IUaKWoMqaOHQKBgQDcHZ02z0an+kOv6yX4\ntT5hy2z/fTxn29YVpQJilLWDrHMzVcGEPl49QgDJLfqvrgFZdiH3F3LpNZlMiMxF\njFuqXtS9HHzXqJm9/ycPN7FIiiVue+KeZ7XgVAFL35PelvlNLfYMgwVVvKqznYTD\nDIwxCSdy1dugtywgmOnzmYmI/wKBgQC6gzhgON1M544eQIHe0zOuVV0BluGlud3O\n1jgMtBQ9tV9yJvJe+ljB3SJEPuqZMHndQbSc7GrlPegiyOTsG2Wg16LWkhiXNzQ4\nQCEkiJZG9WXqi1y0MVLJ8waXQyifbA+d/U8Ffhabnbigy8IQUpAa1/E5bl4UnCo4\nOxI+14gK/wKBgCGKGaR6XOfHiHzLtdN5unGoT4l2ibfBlZNiu0ROKIJRypPt4zjF\nUBLBdeExslsGhoodJ/vAhO/oDN3OkmGei3EgVgYiyxsJQ7Phpw/4injlI+L72YIN\nh3cRFcl73coy8vXBpRYu+KchwljwDYSy6sGmBW7IC1knz/9/jVZi9MP9AoGBAKiP\ngPrNSYuAVduXVwfnfnSW51hRYRsi0Ihm5/7rHMPsUBddhXw66s5CKP7ekazit7Az\n+qQ7shv+B/av8txDomRrndon7Rt0o7gWlR1sZ8w3aeVAEAc18GldPt6jrmnuAms5\njBodqxb2wu5nV7risyPfdz39Nf+QZ0Osdz/eEDBHAoGASfQqDqiOU5bnM9h5NbDP\nvTyxelWQOi8sNOX2WgjSQ5g/++Dr5qTr3j1qRbQV6hDPA1xzvCDWu1fmi97EesAe\n7qE83twTa77wJmL8jW8XYjfdzr7FTtcSwUerWVv/gWeYZKoeKAED/Q7Wayg8qhjJ\ntowd720NPI7w2prlE/+KQBI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "lazybox@lazybox-5fc02.iam.gserviceaccount.com",
+  "client_id": "106857035859084416935",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lazybox%40lazybox-5fc02.iam.gserviceaccount.com"
+}
