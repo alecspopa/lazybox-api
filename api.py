@@ -105,3 +105,7 @@ def intent_to_device_string(intent):
         action.append('off')
 
     return '|'.join(action)
+
+
+if __name__ == '__main__':
+    app.run(debug=True, use_reloader=True)
