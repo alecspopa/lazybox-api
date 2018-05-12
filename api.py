@@ -3,7 +3,7 @@ import dialogflow
 import http
 import firebase_admin
 
-from firebase_admin import credentials, db
+from firebase_admin import db
 from google.cloud import translate
 
 from flask import Flask, request, jsonify
@@ -34,15 +34,13 @@ def intent():
         if latest_state is None:
             return '', http.HTTPStatus.NO_CONTENT
 
-        return state_db.pop()
+        return latest_state
 
 
 class StateDB:
     class __StateDB:
         def __init__(self):
-            cred = credentials.Certificate(os.environ['FIREBASE_APPLICATION_CREDENTIALS'])
-
-            firebase_admin.initialize_app(cred, {
+            firebase_admin.initialize_app(None, {
                 'databaseURL': os.environ['FIREBASE_DATABASE_URL']
             })
 
