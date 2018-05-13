@@ -8,9 +8,11 @@ from firebase_admin import db
 from google.cloud import translate
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+cors = CORS(app, resources={"*": {"origins": "*"}})
 
 
 @app.route("/")

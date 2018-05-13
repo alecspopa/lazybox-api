@@ -11,6 +11,7 @@ firebase-admin = "*"
 google-cloud-translate = "*"
 google-cloud-speech = "*"
 google-cloud = "*"
+flask-cors = "*"
 
 [dev-packages]
 python-dotenv = "*"
