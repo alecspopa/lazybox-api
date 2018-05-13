@@ -31,6 +31,10 @@ def intent():
         state_db.push(intent)
 
         return jsonify(intent)
+    elif request.method == 'DELETE':
+        state_db.pop_delete()
+
+        return '', http.HTTPStatus.NO_CONTENT
     else:
         latest_state = state_db.pop()
 
@@ -79,10 +83,16 @@ class StateDB:
         for key, val in snapshot.items():
             latest_state = val
 
-            del_ref = db.reference('states/' + key)
-            del_ref.delete()
-
         return latest_state
+
+    def pop_delete(self):
+        # pop from stack latest state
+        snapshot = self.db_ref.order_by_key().limit_to_first(1).get()
+
+        if snapshot:
+            for key in snapshot:
+                del_ref = db.reference('states/' + key)
+                del_ref.delete()
 
     @staticmethod
     def __intent_to_device_state(intent):
