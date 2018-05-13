@@ -75,7 +75,8 @@ class StateDB:
         print(device_state)
         print('-' * 20)
 
-        self.db_ref.push(device_state)
+        if device_state is not '':
+            self.db_ref.push(device_state)
 
     def pop(self):
         latest_state = None
