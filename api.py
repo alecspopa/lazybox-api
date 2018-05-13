@@ -23,7 +23,9 @@ def intent():
     state_db = StateDB()
 
     if request.method == 'POST':
-        text_en = translate_text(request.form['text'])
+        payload = request.get_json()
+
+        text_en = translate_text(payload['text'])
         intent = detect_intent('lazybox-5fc02', 'sess1', text_en, 'en')
 
         state_db.push(intent)
