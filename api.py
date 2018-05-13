@@ -18,7 +18,7 @@ def hello():
     return "Hello World!"
 
 
-@app.route("/intent", methods=['GET', 'POST', 'DELETE'])
+@app.route("/intent", methods=['GET', 'POST'])
 def intent():
     state_db = StateDB()
 
@@ -31,10 +31,6 @@ def intent():
         state_db.push(intent)
 
         return jsonify(intent)
-    elif request.method == 'DELETE':
-        state_db.pop_delete()
-
-        return '', http.HTTPStatus.NO_CONTENT
     else:
         latest_state = state_db.pop()
 
@@ -42,6 +38,14 @@ def intent():
             return '', http.HTTPStatus.NO_CONTENT
 
         return latest_state
+
+
+@app.route("/intent/delete")
+def intent_delete():
+    state_db = StateDB()
+    state_db.pop_delete()
+
+    return '', http.HTTPStatus.NO_CONTENT
 
 
 class StateDB:
