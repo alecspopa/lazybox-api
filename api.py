@@ -1,6 +1,7 @@
 import os
 import dialogflow
 import http
+import re
 import firebase_admin
 
 from firebase_admin import db
@@ -58,6 +59,10 @@ class StateDB:
     def push(self, intent):
         device_state = self.__intent_to_device_state(intent)
 
+        print('-' * 20)
+        print(device_state)
+        print('-' * 20)
+
         self.db_ref.push(device_state)
 
     def pop(self):
@@ -86,13 +91,12 @@ class StateDB:
             if param['key'] == 'room':
                 action.append(param['value'])
 
-        # add pin and action info
-        if intent['action'] == 'smarthome.lights.switch.on':
-            action.append('D4')
-            action.append('on')
-        elif intent['action'] == 'smarthome.lights.switch.off':
-            action.append('D4')
-            action.append('off')
+        pattern = re.compile('smarthome\.([a-z]*)\.switch\.([a-z]*)')
+        matches = pattern.match(intent['action'])
+
+        if matches:
+            action.append(matches.group(1)) # device
+            action.append(matches.group(2)) # toogle action
 
         return '|'.join(action)
 
