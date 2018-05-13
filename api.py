@@ -18,7 +18,7 @@ def hello():
     return "Hello World!"
 
 
-@app.route("/intent", methods=['GET', 'POST'])
+@app.route("/intent", methods=['GET', 'POST', 'DELETE'])
 def intent():
     state_db = StateDB()
 
