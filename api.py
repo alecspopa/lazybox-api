@@ -109,12 +109,11 @@ class StateDB:
             if param['key'] == 'room':
                 action.append(param['value'])
 
-        pattern = re.compile('smarthome\.([a-z]*)\.switch\.([a-z]*)')
-        matches = pattern.match(intent['action'])
+        intent_triggers = get_intent_triggers(intent['action'])
 
-        if matches:
-            action.append(matches.group(1)) # device
-            action.append(matches.group(2)) # toogle action
+        if intent_triggers is not None:
+            action.append(intent_triggers['device'])
+            action.append(intent_triggers['toggle_action'])
 
         return '|'.join(action)
 
@@ -170,14 +169,45 @@ def detect_intent(project_id, session_id, text, language_code):
             'value': value
         })
 
+    intent_triggers = get_intent_triggers(response.query_result.action)
+    voice_action = get_voice_action(intent_triggers)
+
     intent = {
         'action': response.query_result.action,
         'intent_detection_confidence': response.query_result.intent_detection_confidence,
         'language_code': response.query_result.language_code,
-        'parameters': parameters
+        'parameters': parameters,
+        'voice_action': voice_action
     }
 
     return intent
+
+
+def get_intent_triggers(action):
+    pattern = re.compile('smarthome\.([a-z]*)\.switch\.([a-z]*)')
+    matches = pattern.match(action)
+
+    intent_triggers = None
+
+    if matches:
+        intent_triggers = {
+            'device': matches.group(1),
+            'toggle_action': matches.group(2)
+        }
+
+    return intent_triggers
+
+
+def get_voice_action(intent_triggers):
+    voice_action = ''
+
+    if intent_triggers is not None:
+        if intent_triggers['device'] == 'lights' and intent_triggers['toggle_action'] == 'on':
+            voice_action = 'Am aprins lumina!'
+        if intent_triggers['device'] == 'lights' and intent_triggers['toggle_action'] == 'off':
+            voice_action = 'Am stins lumina!'
+
+    return voice_action
 
 
 if __name__ == '__main__':
